@@ -6,12 +6,37 @@ form.addEventListener('submit', (a)=>{
     let query = form.querySelector('input').value;
     console.log(query);
 
+   // if(query--){
+    //   query="seal" 
+   // }
+       
+
+
+
+
     tvMazeApi(query);
 })
 
 async function tvMazeApi(query){
     const req = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
-    const res = await req.json();
-    console.log(res);
+    //const res = await req.json();
+    //console.log(res);
+    const movies = await req.json();
+    console.log (movies);
 
+makeImages(movies);
+}
+
+function makeImages(movies) {
+    for (let movie of movies) {
+        let src = movie.show.image.medium;
+
+        const img = document.createElement('img');
+        img.src=src;
+
+        container.appendChild(img);
+
+    }
+        
+    
 }
